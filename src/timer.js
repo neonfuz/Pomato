@@ -10,6 +10,6 @@ const useTimer = (interval=1000) => {
   return [cycles, reset]
 }
 
-const Timer = ({children}) => children(useTimer(1000))
+const Timer = ({interval, children}) => children(useTimer(interval))
 
 export default Timer

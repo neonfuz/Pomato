@@ -1,22 +1,28 @@
 import { useMemo, useEffect } from 'react'
 
-const makeCtx = () => {
-  const canvas = document.createElement('canvas')
-  canvas.width = canvas.height = 16
-  const ctx = canvas.getContext("2d")
-  ctx.font = "12px Arial"
-  return ctx
+class FaviconRenderer {
+  constructor() {
+    this.canvas = document.createElement('canvas')
+    this.canvas.width = this.canvas.height = 16
+    this.ctx = this.canvas.getContext("2d")
+    this.ctx.font = "12px Arial"
+    this.favicon = document.querySelector("link[href='/favicon.ico']")
+  }
+  render(number, color='black', bg='white') {
+    this.ctx.fillStyle = bg
+    this.ctx.fillRect(0, 0, 16, 16)
+    this.ctx.fillStyle = color
+    this.ctx.fillText(number, 1, 12)
+    this.favicon.href = this.canvas.toDataURL('image/png')
+  }
 }
 
+const ONCE = []
+
 const Favicon = ({ number, color='black', bg='white' }) => {
-  const ctx = useMemo(makeCtx)
+  const renderer = useMemo(() => new FaviconRenderer(), ONCE)
   useEffect(() => {
-    ctx.fillStyle = bg
-    ctx.fillRect(0, 0, 16, 16)
-    ctx.fillStyle = color
-    ctx.fillText(number, 1, 12)
-    const favicon = document.querySelector("link[href='/favicon.ico']")
-    favicon.href = ctx.canvas.toDataURL('image/png')
+    renderer.render(number, color, bg)
   }, [number, color, bg])
 
   // Render nothing to the dom

@@ -16,7 +16,8 @@ class Favicon extends Component {
     this.ctx.fillStyle = bg
     this.ctx.fillRect(0, 0, 16, 16)
     this.ctx.fillStyle = color
-    this.ctx.fillText(number, 1, 12)
+    const offset = number < 10 ? 7 : 0
+    this.ctx.fillText(number, 1 + offset, 12)
     this.favicon.href = this.canvas.toDataURL('image/png')
   }
   render() { return null } // Render nothing to the dom

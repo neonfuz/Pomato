@@ -7,7 +7,7 @@ class Favicon extends Component {
     this.canvas.width = this.canvas.height = 16
     this.ctx = this.canvas.getContext("2d")
     this.ctx.font = "12px Arial"
-    this.favicon = document.querySelector("link[href='/favicon.ico']")
+    this.favicon = document.querySelector("link[rel$='icon']")
   }
   componentDidMount() { this.renderFavicon() }
   componentDidUpdate() { this.renderFavicon() }

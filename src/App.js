@@ -3,13 +3,14 @@ import './App.css'
 
 import Timer from './timer'
 import Favicon from './favicon.js'
+import { ReactComponent as Pomato } from './pomato.svg'
 
 const App = () => (
   <div className="App">
-    <h1> Favicon Timer! </h1>
+    <Pomato />
     <Timer interval={1000 * 60}>{([time, reset]) => (
       <>
-        <Favicon number={time} />
+        <Favicon number={Math.max(0, 25-time)} />
         <button onClick={reset}>Reset</button>
       </>
     )}</Timer>

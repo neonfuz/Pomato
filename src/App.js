@@ -14,13 +14,25 @@ const App = () => (
         Pomodoro Technique
       </a>
     </i>
-    <Timer interval={1000 * 60}>{([time, reset]) => (
-      <>
-        <PomTimer time={Math.max(0, 25-time)} />
-        <Favicon number={Math.max(0, 25-time)} />
-        <button onClick={reset}>Reset</button>
-      </>
-    )}</Timer>
+    <Timer interval={1000 * 60}>
+      {([time, reset]) => {
+         const minutes = time
+         const remaining = Math.max(0, 25-minutes)
+         return (
+           <>
+             <PomTimer time={remaining} />
+             <Favicon
+               number={remaining}
+               color="white"
+               bg="#6f2d2a"
+               weight="bold"
+               off1={4}
+             />
+             <button onClick={reset}>Reset</button>
+           </>
+         )
+      }}
+    </Timer>
   </div>
 )
 

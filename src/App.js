@@ -3,13 +3,13 @@ import './App.css'
 
 import Timer from './timer'
 import Favicon from './favicon.js'
-import { ReactComponent as Pomato } from './pomato.svg'
+import PomTimer from './pomtimer'
 
 const App = () => (
   <div className="App">
-    <Pomato />
     <Timer interval={1000 * 60}>{([time, reset]) => (
       <>
+        <PomTimer time={Math.max(0, 25-time)} />
         <Favicon number={Math.max(0, 25-time)} />
         <button onClick={reset}>Reset</button>
       </>

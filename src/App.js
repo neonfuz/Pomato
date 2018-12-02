@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 
 import Timer from './timer'
 import Favicon from './favicon.js'
 import PomTimer from './pomtimer'
+
+const Title = ({title}) => {
+  useEffect(() => {
+    document.title = title
+  })
+  return null
+}
 
 const Blah = () => {
   const [sprintTime, setSprintTime] = useState(25)
@@ -15,6 +22,7 @@ const Blah = () => {
          return (
            <>
              <PomTimer time={remaining} />
+             <Title title={`${remaining} minutes remaining! | Pomato`}/>
              <Favicon
                number={remaining}
                color="white"
@@ -34,6 +42,7 @@ const Blah = () => {
     </Timer>
   )
 }
+
 const App = () => (
   <div className="App">
     <h1>Pomato!</h1>

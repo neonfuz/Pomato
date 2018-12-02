@@ -1,23 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 import Timer from './timer'
 import Favicon from './favicon.js'
 import PomTimer from './pomtimer'
 
-const App = () => (
-  <div className="App">
-    <h1>Pomato!</h1>
-    <i>
-      A simple productivity timer based on the{' '}
-      <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">
-        Pomodoro Technique
-      </a>
-    </i>
+const Blah = () => {
+  const [sprintTime, setSprintTime] = useState(25)
+  return (
     <Timer interval={1000 * 60}>
       {([time, reset]) => {
          const minutes = time
-         const remaining = Math.max(0, 25-minutes)
+         const remaining = Math.max(0, sprintTime-minutes)
          return (
            <>
              <PomTimer time={remaining} />
@@ -28,11 +22,28 @@ const App = () => (
                weight="bold"
                off1={4}
              />
+<div>
+             <input value={sprintTime} onChange={
+               ({target: {value}}) => setSprintTime(value)
+             }/>
              <button onClick={reset}>Reset</button>
+</div>
            </>
          )
       }}
     </Timer>
+  )
+}
+const App = () => (
+  <div className="App">
+    <h1>Pomato!</h1>
+    <i>
+      A simple productivity timer based on the{' '}
+      <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">
+        Pomodoro Technique
+      </a>
+    </i>
+    <Blah />
   </div>
 )
 
